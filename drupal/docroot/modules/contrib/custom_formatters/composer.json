@@ -1,0 +1,13 @@
+{
+  "name": "drupal/custom_formatters",
+  "description": "The Custom Formatters module allows users to easily create custom Field Formatters without the need to write a custom module",
+  "type": "drupal-module",
+  "homepage": "https://www.drupal.org/project/custom_formatters",
+  "keywords": ["Drupal", "media", "video", "transcode", "embed"],
+  "license": "GPL-2.0-or-later",
+  "minimum-stability": "dev",
+  "support": {
+    "issues": "https://www.drupal.org/project/issues/custom_formatters",
+    "source": "https://www.drupal.org/project/custom_formatters"
+  }
+}

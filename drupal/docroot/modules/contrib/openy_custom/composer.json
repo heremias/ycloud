@@ -1,0 +1,10 @@
+{
+  "name": "open-y-subprojects/openy_custom",
+  "description": "Custom core modules for Open Y distrubution.",
+  "type": "drupal-module",
+  "require": {
+    "ymcatwincities/openy": "*"
+  },
+  "license": "GPL-2.0+",
+  "minimum-stability": "dev"
+}

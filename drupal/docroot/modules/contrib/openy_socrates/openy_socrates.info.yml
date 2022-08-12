@@ -1,0 +1,11 @@
+name: Open Y Socrates
+type: module
+description: Provides a smart middleware facade service for connecting different bits of code.
+core_version_requirement: ^8 || ^9
+# version: 8.x-1.0
+package: Open Y
+
+# Information added by Drupal.org packaging script on 2021-09-20
+version: '1.0.2'
+project: 'openy_socrates'
+datestamp: 1632134709

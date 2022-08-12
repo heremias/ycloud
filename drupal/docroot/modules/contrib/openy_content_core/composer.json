@@ -1,0 +1,10 @@
+{
+  "name": "open-y-subprojects/openy_content_core",
+  "description": "Demo content core for Open Y distribution.",
+  "type": "drupal-module",
+  "require": {
+    "ymcatwincities/openy": "*"
+  },
+  "license": "GPL-2.0+",
+  "minimum-stability": "dev"
+}

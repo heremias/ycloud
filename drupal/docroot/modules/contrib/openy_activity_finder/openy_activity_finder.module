@@ -1,0 +1,155 @@
+<?php
+
+/**
+ * @file
+ * Contains openy_activity_finder module hooks.
+ */
+
+use Drupal\Core\Cache\Cache;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\node\NodeInterface;
+use Drupal\openy_activity_finder\OpenyActivityFinderSolrBackend;
+use Drupal\search_api\IndexInterface;
+
+/**
+ * Implements hook_theme().
+ */
+function openy_activity_finder_theme() {
+  return [
+    'openy_activity_finder_program_search' => [
+      'variables' => [
+        'data' => [],
+        'ages' => [],
+        'days' => [],
+        'categories' => [],
+        'categories_type' => '',
+        'activities' => [],
+        'locations' => [],
+        'is_search_box_disabled' => '',
+        'expanderSectionsConfig' => [],
+      ],
+    ],
+    'openy_camp_finder_program_search' => [
+      'variables' => [
+        'data' => [],
+        'ages' => [],
+        'weeks' => [],
+        'categories' => [],
+        'categories_type' => '',
+        'activities' => [],
+        'locations' => [],
+        'is_search_box_disabled' => ''
+      ],
+    ],
+    'openy_activity_finder_program_search_page' => [
+      'variables' => [
+        'locations' => [],
+        'categories' => [],
+        'categories_type' => '',
+        'ages' => [],
+        'days' => [],
+        'weeks' => [],
+        'is_search_box_disabled' => '',
+        'is_spots_available_disabled' => '',
+        'expanderSectionsConfig' => [],
+        'sort_options' => [],
+      ],
+    ],
+    'openy_activity_finder_4_block' => [
+      'variables' => [
+        'backend_service' => '',
+        'label' => '',
+        'label_display' => TRUE,
+        'ages' => [],
+        'days' => [],
+        'times' => [],
+        'days_times' => [],
+        'weeks' => [],
+        'categories' => [],
+        'categories_type' => '',
+        'activities' => [],
+        'locations' => [],
+        'disable_search_box' => FALSE,
+        'disable_spots_available' => FALSE,
+        'sort_options' => [],
+        'default_sort_option' => '',
+        'relevance_sort_option' => '',
+        'filters_section_config' => [],
+        'limit_by_category' => [],
+        'exclude_by_category' => [],
+        'exclude_by_location' => [],
+        'legacy_mode' => FALSE,
+        'weeks_filter' => FALSE,
+        'hide_home_branch_block' => FALSE,
+        'background_image' => [],
+        'bs_version' => NULL,
+      ],
+    ],
+  ];
+}
+
+/**
+ * Implements hook_entity_insert().
+ */
+function openy_activity_finder_entity_insert(EntityInterface $entity) {
+  _openy_activity_finder_invalidate_cache($entity);
+}
+
+/**
+ * Implements hook_entity_update().
+ */
+function openy_activity_finder_entity_update(EntityInterface $entity) {
+  _openy_activity_finder_invalidate_cache($entity);
+}
+
+/**
+ * Implements hook_entity_delete().
+ */
+function openy_activity_finder_entity_delete(EntityInterface $entity) {
+  _openy_activity_finder_invalidate_cache($entity);
+}
+
+/**
+ * Helper function for Activity Finder cache invalidation.
+ *
+ * @param $entity EntityInterface
+ */
+function _openy_activity_finder_invalidate_cache($entity) {
+  if ($entity->getEntityTypeId() != 'node') {
+    return;
+  }
+
+  $bundle = $entity->bundle();
+  if (!in_array($bundle, ['program_subcategory', 'branch', 'camp', 'facility'])) {
+    return;
+  }
+
+  // Invalidate activity finder cache.
+  Cache::invalidateTags([OpenyActivityFinderSolrBackend::ACTIVITY_FINDER_CACHE_TAG]);
+}
+
+/**
+ * Implements hook_search_api_solr_field_mapping_alter().
+ */
+function openy_activity_finder_search_api_solr_field_mapping_alter(IndexInterface $index, array &$fields) {
+  if (isset($fields['af_time_of_day'])) {
+    // We can sort only by single value fields.
+    // @see https://www.drupal.org/project/search_api_solr/issues/2906905
+    $fields['af_time_of_day'] = 'ds_af_time_of_day';
+  }
+  if (isset($fields['af_date_of_day'])) {
+    // We can sort only by single value fields.
+    // @see https://www.drupal.org/project/search_api_solr/issues/2906905
+    $fields['af_date_of_day'] = 'ds_af_date_of_day';
+  }
+}
+
+/**
+ * Implements hook_activity_finder_program_process_results_alter().
+ */
+function openy_activity_finder_activity_finder_program_process_results_alter(array &$data, NodeInterface $entity) {
+  // Add min/max age values (in months).
+  $data['min_age'] = $entity->field_session_min_age->value;
+  $data['max_age'] = $entity->field_session_max_age->value;
+  $data['product_id'] = $entity->field_productid->value;
+}

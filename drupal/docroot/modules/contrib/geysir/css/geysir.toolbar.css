@@ -1,0 +1,28 @@
+.toolbar .toolbar-bar .geysir-toolbar-tab.toolbar-tab {
+  float: right; /* LTR */
+}
+
+[dir="rtl"] .toolbar .toolbar-bar .geysir-toolbar-tab.toolbar-tab {
+  float: left;
+}
+
+.toolbar .toolbar-bar .geysir-toolbar-tab .toolbar-item {
+  margin: 0;
+}
+
+.toolbar .toolbar-bar .geysir-toolbar-tab .toolbar-item.is-active {
+  background-image: -webkit-linear-gradient(rgb(78, 159, 234) 0%, rgb(69, 132, 221) 100%);
+  background-image: linear-gradient(rgb(78, 159, 234) 0%, rgb(69, 132, 221) 100%);
+}
+
+/**
+ * Toolbar tab icon.
+ */
+.toolbar-bar .toolbar-icon-geysir:before,
+.toolbar-bar .toolbar-icon-geysir:active:before {
+  background-image: url(../images/toolbar/bebebe/geysir-icon.svg);
+}
+
+.toolbar-bar .toolbar-icon-geysir.is-active:before {
+  background-image: url(../images/toolbar/ffffff/geysir-icon.svg);
+}

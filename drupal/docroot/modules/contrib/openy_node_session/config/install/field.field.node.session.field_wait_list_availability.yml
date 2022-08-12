@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_wait_list_availability
+    - node.type.session
+  module:
+    - datalayer
+third_party_settings:
+  datalayer:
+    expose: 0
+    label: ''
+id: node.session.field_wait_list_availability
+field_name: field_wait_list_availability
+entity_type: node
+bundle: session
+label: 'Wait List Availability'
+description: 'Availability for the wait list for registration.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

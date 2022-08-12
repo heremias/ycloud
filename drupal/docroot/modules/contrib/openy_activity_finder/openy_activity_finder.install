@@ -1,0 +1,261 @@
+<?php
+
+/**
+ * @file
+ * Contains install and update routines.
+ */
+
+use Drupal\user\Entity\Role;
+use Drupal\user\RoleInterface;
+
+/**
+ * Implements hook_install().
+ */
+function openy_activity_finder_install() {
+  // Add permissions to anonymous and authenticated roles.
+  $permissions = [
+    'restful get openy_activity_finder_session_data',
+  ];
+  $roles = Role::loadMultiple([
+    RoleInterface::ANONYMOUS_ID,
+    RoleInterface::AUTHENTICATED_ID
+  ]);
+  foreach ($roles as $role) {
+    foreach ($permissions as $permission) {
+      $role->grantPermission($permission);
+    }
+    $role->save();
+  }
+}
+
+/**
+ * Implements hook_update_dependencies().
+ */
+function openy_activity_finder_update_dependencies() {
+  $dependencies['openy_activity_finder'] = [
+    8006 => [
+      'search_api_solr' => 8332,
+    ],
+  ];
+
+  return $dependencies;
+}
+
+/**
+* Update configs.
+*/
+function openy_activity_finder_update_8001() {
+  $openy_activity_finder_dir = \Drupal::service('extension.list.module')->getPath('openy_activity_finder');
+  $cim = \Drupal::service('config_import.importer');
+  $cim->setDirectory($openy_activity_finder_dir . '/config/install');
+  $cim->importConfigs(['openy_activity_finder.settings']);
+
+  $cim->setDirectory($openy_activity_finder_dir . '/config/optional');
+  $config = \Drupal::config('search_api.index.default');
+  if (!$config->isNew()) {
+    // Import config only in case it already exist.
+    $cim->importConfigs(['search_api.index.default']);
+  }
+}
+
+/**
+ * Update configs.
+ */
+function openy_activity_finder_update_8002() {
+  $cim = \Drupal::service('config_import.importer');
+  $cim->setDirectory(\Drupal::service('extension.list.module')->getPath('openy_activity_finder') . '/config/optional');
+  $config = \Drupal::config('search_api.index.default');
+  if (!$config->isNew()) {
+    // Import config only in case it already exist.
+    $cim->importConfigs(['search_api.index.default']);
+  }
+}
+
+/**
+ * Update configs.
+ */
+function openy_activity_finder_update_8003() {
+  \Drupal::service('module_installer')->install(['openy']);
+  $cim = \Drupal::service('config_import.importer');
+  $cim->setDirectory(\Drupal::service('extension.list.module')->getPath('openy_activity_finder') . '/config/install');
+  $cim->importConfigs(['openy_activity_finder.settings']);
+}
+
+/**
+ * Update Activity Finder configs.
+ */
+function openy_activity_finder_update_8004(&$sandbox) {
+  \Drupal::configFactory()
+    ->getEditable('openy_activity_finder.settings')
+    ->set('index', 'default')
+    ->save();
+}
+
+/**
+ * Update configs.
+ */
+function openy_activity_finder_update_8005() {
+  $cim = \Drupal::service('config_import.importer');
+  $cim->setDirectory(\Drupal::service('extension.list.module')->getPath('openy_activity_finder') . '/config/optional');
+  $config = \Drupal::config('search_api.index.default');
+  if (!$config->isNew()) {
+    // Import config only in case it already exist.
+    $cim->importConfigs(['search_api.index.default']);
+  }
+}
+
+/**
+ * Enable Search API Solr legacy if needed.
+ */
+function openy_activity_finder_update_8006() {
+  $messages = [];
+  if (openy_enable_search_api_solr_legacy()) {
+    $messages[] = '***';
+    $messages[] = '*** You are using a legacy version of Apache Solr. Enabling the Search API Solr Legacy module. ***';
+    $messages[] = '***';
+    $messages[] = '';
+  }
+  $messages[] = '* MAJOR SOLR SEARCH MODULE UPGRADE (1.x to 4.x).';
+  $messages[] = '*';
+  $messages[] = '* Download the updated Apache Solr configuration form the Search API module <a href="/admin/config/search/search-api">configuration page</a>.';
+  $messages[] = '** On the page, find each individual Search server, click its name and download the config.zip using "Get config.zip" button.';
+  $messages[] = '** Alternatively, use `drush solr-gsc YOUR_SEARCH_API_SERVER_ID` command.';
+  $messages[] = '** Alternatively, use a jump-start configuration from https://git.drupalcode.org/project/search_api_solr/-/tree/4.x/jump-start';
+  $messages[] = '* Apply the new Solr configuration. Ask your server administrator or a hosting support for assistance.';
+  $messages[] = '* Reindex the associated Search API indexes.';
+  $messages[] = '*';
+  $messages[] = '* For more details see https://www.drupal.org/docs/8/modules/search-api-solr/search-api-solr-howtos/migrate-from-8x-1x-to-4x';
+  $messages[] = '*';
+
+  $messenger = \Drupal::messenger();
+  foreach ($messages as $message) {
+    $messenger->addMessage($message, 'warning');
+    if (function_exists('drush_print')) {
+      drush_print($message);
+    }
+  }
+}
+
+/**
+ * Update Activity Finder configs.
+ */
+function openy_activity_finder_update_8007(&$sandbox) {
+  $config = \Drupal::configFactory()->getEditable('openy_activity_finder.settings');
+  if ($config && empty($config->get('weeks'))) {
+    $config->set('weeks', '');
+    $config->save();
+  }
+}
+
+/**
+ * Update configs for af4.
+ */
+function openy_activity_finder_update_8008() {
+  $cim = \Drupal::service('config_import.importer');
+  $cim->setDirectory(\Drupal::service('extension.list.module')->getPath('openy_activity_finder') . '/config/optional');
+  $config = \Drupal::config('search_api.index.default');
+  if (!$config->isNew()) {
+    // Import config only in case it already exist.
+    $cim->importConfigs(['search_api.index.default']);
+  }
+}
+
+/**
+ * Update configs for af4.
+ */
+function openy_activity_finder_update_8009() {
+  $cim = \Drupal::service('config_import.importer');
+  $cim->setDirectory(\Drupal::service('extension.list.module')->getPath('openy_activity_finder') . '/config/optional');
+  $config = \Drupal::config('search_api.index.default');
+  if (!$config->isNew()) {
+    // Import config only in case it already exist.
+    $cim->importConfigs(['search_api.index.default']);
+  }
+}
+
+/**
+ * Add Session Data rest endpoint config and permissions.
+ */
+function openy_activity_finder_update_8400() {
+  // Import config for rest endpoint.
+  $cim = \Drupal::service('config_import.importer');
+  $cim->setDirectory(\Drupal::service('extension.list.module')->getPath('openy_activity_finder') . '/config/install');
+  $cim->importConfigs(['rest.resource.openy_activity_finder_session_data']);
+  // Add permissions to anonymous and authenticated roles.
+  $permissions = [
+    'restful get openy_activity_finder_session_data',
+  ];
+  $roles = Role::loadMultiple([
+    RoleInterface::ANONYMOUS_ID,
+    RoleInterface::AUTHENTICATED_ID
+  ]);
+  foreach ($roles as $role) {
+    foreach ($permissions as $permission) {
+      $role->grantPermission($permission);
+    }
+    $role->save();
+  }
+}
+
+/**
+ * Update configs for search index.
+ */
+function openy_activity_finder_update_8401() {
+  $cim = \Drupal::service('config_import.importer');
+  $cim->setDirectory(\Drupal::service('extension.list.module')->getPath('openy_activity_finder') . '/config/optional');
+  $config = \Drupal::config('search_api.index.default');
+  if (!$config->isNew()) {
+    // Import config only in case it already exists.
+    $cim->importConfigs(['search_api.index.default']);
+  }
+}
+
+/**
+ * Update Bootstrap version in Activity Finder configs.
+ */
+function openy_activity_finder_update_8402() {
+  \Drupal::configFactory()
+    ->getEditable('openy_activity_finder.settings')
+    ->set('bs_version', 3)
+    ->save();
+}
+
+/**
+ * Update configs for search index.
+ */
+function openy_activity_finder_update_8403() {
+  $cim = \Drupal::service('config_import.importer');
+  $cim->setDirectory(\Drupal::service('extension.list.module')->getPath('openy_activity_finder') . '/config/optional');
+  $config = \Drupal::config('search_api.index.default');
+  if (!$config->isNew()) {
+    // Import config only in case it already exists.
+    $cim->importConfigs(['search_api.index.default']);
+  }
+}
+
+/**
+ * Update configs for search index.
+ */
+function openy_activity_finder_update_8404() {
+  _af_config_import();
+}
+
+/**
+ * Update configs for search index. Configs should be sent in an array where the
+ * key is the directory and the value is an array of config files.
+ */
+function _af_config_import($import = ['optional' => ['search_api.index.default']]) {
+  $cim = \Drupal::service('config_import.importer');
+  // Loop through keys as directories...
+  foreach ($import as $dir => $configs) {
+    $cim->setDirectory(\Drupal::service('extension.list.module')->getPath('openy_activity_finder') . '/config/'. $dir);
+    // Now process each config to be imported.
+    foreach ($configs as $name) {
+      $config = \Drupal::config($name);
+      if (!$config->isNew()) {
+        // Import config only in the case that it already exists.
+        $cim->importConfigs([$name]);
+      }
+    }
+  }
+}

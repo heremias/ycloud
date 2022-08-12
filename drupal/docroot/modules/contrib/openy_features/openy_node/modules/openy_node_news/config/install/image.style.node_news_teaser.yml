@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies: {  }
+name: node_news_teaser
+label: 'Node news teaser'
+effects:
+  d029a509-0ee4-4230-b595-9f373357e571:
+    uuid: d029a509-0ee4-4230-b595-9f373357e571
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 362
+      height: 362
+      anchor: center-center
+  6c434290-d50d-438c-89ff-c6fbe291e1c0:
+    uuid: 6c434290-d50d-438c-89ff-c6fbe291e1c0
+    id: image_convert
+    weight: 2
+    data:
+      extension: webp

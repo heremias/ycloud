@@ -1,0 +1,43 @@
+<?php
+
+/**
+ * @file
+ * Module install file.
+ */
+
+use Drupal\Core\Url;
+
+/**
+ * Implements hook_requirements().
+ */
+function vendor_stream_wrapper_requirements($phase) {
+  $requirements = [];
+
+  // Warn the user when there are no file patterns set, most typically this
+  // means that this module is not configured correctly.
+  if ($phase === 'runtime') {
+    $config = \Drupal::configFactory()->get('vendor_stream_wrapper.settings');
+
+    $allowed_file_patterns = $config->get('allowed_file_patterns');
+
+    $requirements['vendor_stream_wrapper_allowed_file_pattern'] = [
+      'title' => t('Vendor Stream Wrapper'),
+    ];
+
+    if (empty($allowed_file_patterns)) {
+      $requirements['vendor_stream_wrapper_allowed_file_pattern']['value'] = t('Missing configuration');
+      $requirements['vendor_stream_wrapper_allowed_file_pattern']['description'] = t('For the vendor files to be accessible/downloadable, allowed file pattern(s) should be <a href=":url">configured</a>. Please consult the modules and/or themes that require the Vendor Stream Wrapper module for appropriate file patterns.', [
+        ':url' => Url::fromRoute('vendor_stream_wrapper.settings')->toString(),
+      ]);
+      $requirements['vendor_stream_wrapper_allowed_file_pattern']['severity'] = REQUIREMENT_WARNING;
+    }
+    else {
+      $requirements['vendor_stream_wrapper_allowed_file_pattern']['description'] = t('The allowed file patterns is set to allow files matching %allowed_file_patterns to be accessed/downloaded from the vendor directory.', [
+        '%allowed_file_patterns' => implode(', ', $allowed_file_patterns),
+      ]);
+      $requirements['vendor_stream_wrapper_allowed_file_pattern']['severity'] = REQUIREMENT_INFO;
+    }
+  }
+
+  return $requirements;
+}

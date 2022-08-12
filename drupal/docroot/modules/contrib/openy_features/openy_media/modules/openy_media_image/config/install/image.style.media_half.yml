@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies: {  }
+name: media_half
+label: 'Media Half'
+effects:
+  dcfb6c34-88c2-4cdd-9c6b-50c6e5c17a94:
+    uuid: dcfb6c34-88c2-4cdd-9c6b-50c6e5c17a94
+    id: image_scale
+    weight: 1
+    data:
+      width: 570
+      height: null
+      upscale: false
+  da79b7d8-2eaa-455d-a3cc-1c88a985efd5:
+    uuid: da79b7d8-2eaa-455d-a3cc-1c88a985efd5
+    id: image_convert
+    weight: 2
+    data:
+      extension: webp

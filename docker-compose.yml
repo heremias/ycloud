@@ -1,0 +1,35 @@
+version: '3'
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql2
+    command: --default-authentication-plugin=mysql_native_password
+    restart: unless-stopped
+    env_file: .env
+    volumes:
+      - db-data:/var/lib/mysql
+    networks:
+      - internal
+  
+  drupal:
+    depends_on:
+      - mysql
+    build: .
+    ports:
+      - "8080:80"
+    networks:
+      - internal
+      - external
+    volumes:
+      - drupal-data:/var/www/drupal
+    restart: always
+
+networks:
+  external:
+    driver: bridge
+  internal:
+    driver: bridge
+
+volumes:
+  drupal-data:
+  db-data:

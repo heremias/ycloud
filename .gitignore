@@ -3,20 +3,20 @@
 # earlier versions of Drupal are tracked in `community/PHP/`
 
 # Ignore configuration files that may contain sensitive information
-/sites/*/*settings*.php
-/sites/*/*services*.yml
+drupal/docroot/sites/*/*settings*.php
+drupal/docroot/sites/*/*services*.yml
 
 # Ignore paths that may contain user-generated content
-/sites/*/files
-/sites/*/public
-/sites/*/private
-/sites/*/files-public
-/sites/*/files-private
+drupal/docroot/sites/*/files
+drupal/docroot/sites/*/public
+drupal/docroot/sites/*/private
+drupal/docroot/sites/*/files-public
+drupal/docroot/sites/*/files-private
 
 # Ignore paths that may contain temporary files
-/sites/*/translations
-/sites/*/tmp
-/sites/*/cache
+drupal/docroot/sites/*/translations
+drupal/docroot/sites/*/tmp
+drupal/docroot/sites/*/cache
 
 # Ignore testing related files
 /sites/simpletest
@@ -30,20 +30,20 @@
 /sites/example.settings.local.php
 /sites/development.services.yml
 /themes/README.txt
-/vendor
-/.csslintrc
-/.editorconfig
-/.eslintignore
-/.eslintrc.json
-/.gitattributes
-/.htaccess
-/autoload.php
-/composer.json
-/composer.lock
-/example.gitignore
-/index.php
-/LICENSE.txt
-/README.txt
-/robots.txt
-/update.php
-/web.config
+drupal/vendor
+drupal/.csslintrc
+drupal/.editorconfig
+drupal/.eslintignore
+drupal/.eslintrc.json
+drupal/.gitattributes
+drupal/.htaccess
+drupal/autoload.php
+drupal/composer.json
+drupal/composer.lock
+drupal/example.gitignore
+drupal/index.php
+drupal/LICENSE.txt
+drupal/README.txt
+drupal/robots.txt
+drupal/update.php
+drupal/web.config

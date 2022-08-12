@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {  }
+id: activity_finder
+label: 'Activity Finder [deprecated]'
+icon_uuid: null
+description: 'Paragraph for Activity Finder [deprecated].'
+behavior_plugins: {  }

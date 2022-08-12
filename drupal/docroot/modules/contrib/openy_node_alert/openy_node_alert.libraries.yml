@@ -1,0 +1,12 @@
+alert:
+  version: 1.0
+  js:
+    js/openy-alerts/build/main.js: {preprocess: false}
+    js/openy_node_alert.js: {preprocess: false}
+  css:
+    component:
+      js/openy-alerts/build/main.css: {preprocess: false}
+  dependencies:
+    - core/drupal
+    - core/jquery
+    - openy_system/jquery.matchHeight

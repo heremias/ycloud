@@ -1,0 +1,17 @@
+***************
+*** 281,287 ****
+      $exclude['/user'] = TRUE;
+  
+      // See if we are doing a Custom Path override.
+-     $path_crumb_row = preg_split('/[\r\n]+/', $this->config->get(EasyBreadcrumbConstants::CUSTOM_PATHS));
+      $path_crumb_row = array_filter($path_crumb_row);
+      foreach ($path_crumb_row as $path_crumb) {
+        $values = explode("::", $path_crumb);
+--- 281,287 ----
+      $exclude['/user'] = TRUE;
+  
+      // See if we are doing a Custom Path override.
++     $path_crumb_row = preg_split('/[\r\n]+/', (string) $this->config->get(EasyBreadcrumbConstants::CUSTOM_PATHS));
+      $path_crumb_row = array_filter($path_crumb_row);
+      foreach ($path_crumb_row as $path_crumb) {
+        $values = explode("::", $path_crumb);

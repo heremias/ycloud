@@ -1,0 +1,5 @@
+services:
+  ymca_sync.commands:
+    class: \Drupal\ymca_sync\Commands\YmcaSyncCommands
+    tags:
+      - { name: drush.command }

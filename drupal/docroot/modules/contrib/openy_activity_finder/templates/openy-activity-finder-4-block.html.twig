@@ -1,0 +1,66 @@
+{#
+/**
+ * @file
+ *
+ * Available variables:
+ * - backend_service
+ * - label
+ * - label_display
+ * - ages
+ * - days
+ * - times
+ * - days_times
+ * - weeks
+ * - categories
+ * - categories_type
+ * - activities
+ * - locations
+ * - is_search_box_disabled
+ * - is_spots_available_disabled
+ * - expanderSectionsConfig
+ * - sort_options
+ * - default_sort_option
+ * - relevance_sort_option
+ * - limit_by_category
+ * - exclude_by_category
+ * - exclude_by_location
+ * - legacy_mode
+ * - weeks_filter
+ * - background_image
+ * - bs_version
+ */
+ *
+#}
+
+<div id="activity-finder">
+  <div class="activity-finder__wrapper">
+    <activity-finder
+      :backend-service="{{ backend_service|json_encode }}"
+      :label="{{ label|json_encode }}"
+      :label-display="{{ label_display|json_encode }}"
+      :ages="{{ ages|json_encode }}"
+      :days="{{ days|json_encode }}"
+      :times="{{ times|json_encode }}"
+      :days-times="{{ days_times|json_encode }}"
+      :weeks="{{ weeks|json_encode }}"
+      :categories="{{ categories|json_encode }}"
+      :categories-type="{{ categories_type|json_encode }}"
+      :activities="{{ activities|json_encode }}"
+      :locations="{{ locations|json_encode }}"
+      :sort-options="{{ sort_options|json_encode }}"
+      :default-sort-option="{{ default_sort_option|json_encode }}"
+      :relevance-sort-option="{{ relevance_sort_option|json_encode }}"
+      :limit-by-category="{{ limit_by_category|json_encode }}"
+      :exclude-by-location="{{ exclude_by_location|json_encode }}"
+      :exclude-by-category="{{ exclude_by_category|json_encode }}"
+      :legacy-mode="{{ legacy_mode|json_encode }}"
+      :weeks-filter="{{ weeks_filter|json_encode }}"
+      :hide-home-branch-block="{{ hide_home_branch_block|json_encode }}"
+      :background-image="{{ background_image|json_encode }}"
+      :disable-spots-available="{{ disable_spots_available|json_encode }}"
+      :disable-search-box="{{ disable_search_box|json_encode }}"
+      :filters-section-config="{{ filters_section_config|json_encode }}"
+      :bs-version="{{ bs_version|json_encode }}"
+    ></activity-finder>
+  </div>
+</div>

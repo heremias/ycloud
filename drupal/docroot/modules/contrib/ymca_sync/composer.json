@@ -1,0 +1,21 @@
+{
+    "name": "ymcatwincities/ymca_sync",
+    "description": "Syncer sceleton",
+    "type": "drupal-module",
+    "authors": [
+        {
+            "name": "Andrii Podanenko",
+            "email": "podarokua@gmail.com"
+        },
+        {
+            "name": "Vlad Sadretdinov",
+            "email": "vlad.sadretdinov@jet.dev"
+        },
+        {
+            "name": "Dima Danylevskyi",
+            "email": "dima.danylevskyi@jet.dev"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}

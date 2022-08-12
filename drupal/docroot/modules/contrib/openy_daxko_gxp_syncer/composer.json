@@ -1,0 +1,10 @@
+{
+  "name": "open-y-subprojects/openy_daxko_gxp_syncer",
+  "description": "Daxko v1 GroupEx PRO API Syncer into Open Y Program Event Framework.",
+  "type": "drupal-module",
+  "require": {
+    "ymcatwincities/openy": "*"
+  },
+  "license": "GPL-2.0+",
+  "minimum-stability": "dev"
+}

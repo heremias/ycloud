@@ -1,0 +1,59 @@
+standard:
+  name: Standard
+  packages:
+    - alerts
+    - editorial
+    - news
+    - seo
+    - webform
+
+extended:
+  name: Extended
+  packages:
+    - alerts
+    - analytics
+    - editorial
+    - editorial_ext
+    - events
+    - locations
+    - membership
+    - news
+    - social_sharing
+    - translation
+    - seo
+    - search
+    - webform
+
+complete:
+  name: Complete/Developer
+  hidden: true
+  packages:
+    - activenet
+    - alerts
+    - analytics
+    - blog
+    - camps
+    - daxko
+    - editorial
+    - editorial_adv
+    - editorial_ext
+    - embeddable_header_footer
+    - events
+    - groupexpro
+    - helpers
+    - locations
+    - locations_ext
+    - membership
+    - news
+    - news_ext
+    - optimize
+    - popups
+    - programs
+    - search
+    - seo
+    - social
+    - social_sharing
+    - scheduler
+    - theme_customization
+    - translation
+    - webform

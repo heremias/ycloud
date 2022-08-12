@@ -1,0 +1,52 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.session_time.field_session_time_date
+    - field.field.paragraph.session_time.field_session_time_days
+    - field.field.paragraph.session_time.field_session_time_override
+    - paragraphs.paragraphs_type.session_time
+  module:
+    - datetime_range
+    - options
+id: paragraph.session_time.default
+targetEntityType: paragraph
+bundle: session_time
+mode: default
+content:
+  field_session_time_date:
+    weight: 0
+    label: above
+    settings:
+      separator: '-'
+      format_type: medium
+      timezone_override: ''
+    third_party_settings: {  }
+    type: daterange_default
+    region: content
+  field_session_time_days:
+    weight: 1
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+  field_session_time_override:
+    type: string
+    weight: 2
+    label: above
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  moderation_state:
+    type: moderation_state_default
+    weight: 100
+    settings: {  }
+    region: content
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true
+  uid: true

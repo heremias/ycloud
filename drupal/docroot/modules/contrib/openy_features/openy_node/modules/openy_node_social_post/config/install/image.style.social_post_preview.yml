@@ -1,0 +1,12 @@
+langcode: en
+status: true
+dependencies: {  }
+name: social_post_preview
+label: 'Social post preview'
+effects:
+  33f73c57-01b3-4354-a52d-1c7fc9aaa748:
+    uuid: 33f73c57-01b3-4354-a52d-1c7fc9aaa748
+    id: image_convert
+    weight: 1
+    data:
+      extension: webp

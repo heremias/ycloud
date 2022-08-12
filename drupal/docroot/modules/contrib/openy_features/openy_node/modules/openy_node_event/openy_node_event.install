@@ -1,0 +1,41 @@
+<?php
+
+/**
+ * @file
+ * Module install file.
+ */
+
+/**
+ * Update handler and description for field_event_location.
+ */
+function openy_node_event_update_8001() {
+  $config_dir = \Drupal::service('extension.list.module')->getPath('openy_node_event') . '/config/install/';
+  // Update multiple configurations.
+  $configs = [
+    'field.field.node.event.field_event_location' => [
+      'settings',
+      'description',
+      'dependencies.config',
+    ],
+  ];
+
+  $config_updater = \Drupal::service('openy_upgrade_tool.param_updater');
+  foreach ($configs as $config_name => $params) {
+    $config = $config_dir . $config_name . '.yml';
+    foreach ($params as $param) {
+      $config_updater->update($config, $config_name, $param);
+    }
+  }
+}
+
+/**
+ * Apply Webp to all image styles.
+ */
+function openy_node_event_update_8003() {
+  $path = \Drupal::service('extension.list.module')->getPath('openy_node_event') . '/config/install';
+  $config_importer = \Drupal::service('config_import.importer');
+  $config_importer->setDirectory($path);
+  $config_importer->importConfigs([
+    'image.style.event_teaser'
+  ]);
+}

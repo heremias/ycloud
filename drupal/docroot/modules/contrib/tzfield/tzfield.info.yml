@@ -1,0 +1,11 @@
+name: Time Zone
+type: module
+description: Defines a time zone field type.
+core: 8.x
+package: Field types
+core_version_requirement: ^8 || ^9 || ^10
+
+# Information added by Drupal.org packaging script on 2022-04-19
+version: '8.x-1.6'
+project: 'tzfield'
+datestamp: 1650400288

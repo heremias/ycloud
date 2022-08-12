@@ -1,0 +1,59 @@
+---
+# Commands to prepare environment.
+- name: Set writable cache dir
+  become: yes
+  file: path={{ cache_folder }} mode=777 state=directory recurse=yes
+  ignore_errors: yes
+
+- name: Set writable tmp dir
+  become: yes
+  file: dest={{ tmp_folder }} mode=777 state=directory recurse=yes
+  ignore_errors: yes
+
+- name: Set writable backup dir
+  become: yes
+  file: dest={{ backup_folder }} mode=777 state=directory recurse=yes
+  ignore_errors: yes
+
+- name: Set writable default dir
+  become: yes
+  file: dest=sites/{{ settings_site_folder }} mode=777 state=directory recurse=yes
+  ignore_errors: yes
+
+- name: Set writable files dir
+  become: yes
+  file: dest=sites/{{ settings_site_folder }}/files mode=777 state=directory recurse=yes
+  ignore_errors: yes
+
+- name: Set writable private dir
+  become: yes
+  file: dest=sites/{{ settings_site_folder }}/files/private mode=777 state=directory recurse=yes
+  ignore_errors: yes
+
+- name: Creating staging config directory
+  become: yes
+  file:
+    path: "{{ staging_config_dir }}"
+    state: directory
+
+- name: Creating sync config directory
+  become: yes
+  file:
+    path: "{{ sync_config_dir }}"
+    state: directory
+
+- name: Creating sites.php
+  become: yes
+  shell: "cp {{ sites_default_file_path }} sites/sites.php"
+
+- name: Add environments to sites.php
+  become: yes
+  lineinfile: dest='sites/sites.php' line='$sites[\"{{ item.url }}\"] = \"{{ item.folder }}\";'
+  loop: "{{ build_environments }}"
+
+- name: Start the MySQL service
+  become: yes
+  service:
+    name: mysql
+    state: started
+    enabled: true

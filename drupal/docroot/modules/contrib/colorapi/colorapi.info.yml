@@ -1,0 +1,10 @@
+name: 'Color API'
+description: 'Provides a full set of functionality around the idea of a "color" within Drupal, providing low level data types, an optional Color Field, and an optional Color Entity, and related functionality.'
+type: module
+core_version_requirement: ^8 || ^9 || ^10
+configure: colorapi.admin_config
+
+# Information added by Drupal.org packaging script on 2022-06-30
+version: '8.x-1.2'
+project: 'colorapi'
+datestamp: 1656581368

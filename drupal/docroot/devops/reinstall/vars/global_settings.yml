@@ -1,0 +1,75 @@
+---
+drupal_user: admin
+drupal_pass: open9622
+http_user: admin
+http_pass: openy
+installation_profile_name: openy
+mysql_user: root
+mysql_pass: root
+mysql_db: drupal
+mysql_host: 127.0.0.1
+cache_folder: /var/www/cache
+backup_folder: /var/www/backup
+tmp_folder: /tmp
+php_env_vars: 'PHP_OPTIONS="-d sendmail_path=`which true`" APP_ENV=dev' # APP_ENV=dev - this varible will be set at PR_BUILDER from CI shell executor.
+site_url: 'http://drupal.192.168.56.132.xip.io' # No trailing slash!
+# Site url to download assets via stage_file_proxy.
+origin_site_url: 'http://ci.openymca.org/backup/latest_release_files'
+origin_site_directory: 'sites/default/files'
+stage_file_proxy: false
+stage_file_proxy_version: "stage_file_proxy-8.x-1.0-beta1"
+# This variable will be used for variable_get('environment'). Can be overridden by CI server.
+# development = 'default', demo = 'demo', staging = 'staging', production = 'production'.
+pp_environment: 'default'
+# This variable allows select type of installation. Can be overridden by CI server.
+# From installation profile = 'profile', from sql dump = 'sql'.
+workflow_type: 'profile'
+run_installation_process: false
+is_windows: false
+ci_server_username: 'jenkins'
+# This variable allows make backup from CI environment before processing.
+# true, false.
+make_backup: false
+rebuild_registry: false
+# Local environment that will be used from backup.
+local_backup_environment: 'staging'
+# htpasswd protection for securing backups.
+backup_user: cibox
+backup_pass: givemebackup
+# Source backup database that will be downloaded to build site.
+# In many cases this is production dump.
+source_backup_name: latest_release.sql.gz
+# URL to the source database. Can be overridden by CI server.
+source_database: http://{{ backup_user }}:{{ backup_pass }}@ci.openymca.org/backup/{{ source_backup_name }}
+settings_site_folder: default
+# Path where settings.php should be placed.
+settings_file_path: sites/{{ settings_site_folder }}/settings.php
+settings_default_file_path: sites/default/default.settings.php
+sites_default_file_path: sites/example.sites.php
+staging_config_dir: 'sites/default/config/staging'
+sync_config_dir: 'sites/default/config/sync'
+
+# OpenY related section
+build_environments:
+  - { folder: 'upgrade', url: 'upgrade.drupal.192.168.56.132.xip.io' }
+  - { folder: 'upgrade', url: 'upgrade.openy.cibox.tools' }
+  - { folder: 'profile', url: 'profile.openy.cibox.tools' }
+  - { folder: 'install', url: 'install.drupal.192.168.56.132.xip.io' }
+  - { folder: 'openy_carnation_cus', url: 'sandbox-carnation-cus.openy.org' }
+  - { folder: 'openy_carnation_ext', url: 'sandbox-carnation-ext.openy.org' }
+  - { folder: 'openy_carnation_std', url: 'sandbox-carnation-std.openy.org' }
+  - { folder: 'openy_lily_cus', url: 'sandbox-lily-cus.openy.org' }
+  - { folder: 'openy_lily_ext', url: 'sandbox-lily-ext.openy.org' }
+  - { folder: 'openy_lily_std', url: 'sandbox-lily-std.openy.org' }
+  - { folder: 'openy_rose_cus', url: 'sandbox-rose-cus.openy.org' }
+  - { folder: 'openy_rose_ext', url: 'sandbox-rose-ext.openy.org' }
+  - { folder: 'openy_rose_std', url: 'sandbox-rose-std.openy.org' }
+
+openy_profile_install_settings: '-d -vvvv openy_terms_of_use.agree_openy_terms=1 openy_terms_of_use.analytics_optin=1 install_configure_form.enable_update_status_emails=NULL openy_configure_profile.preset=complete'
+
+# SOLR
+use_solr: false
+solr_conf_path: '/opt/solr/solr'
+solr_data_path: '/var/solr/data'
+default_solr_collection_path: "{{ solr_data_path }}/collection1"
+solr_module_config_path: 'modules/contrib/search_api_solr/solr-conf-templates/8.x'

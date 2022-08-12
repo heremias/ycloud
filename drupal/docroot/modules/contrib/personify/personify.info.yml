@@ -1,0 +1,11 @@
+name: Personify
+type: module
+description: Provides an Personify integration.
+core_version_requirement: ^8 || ^9
+# version: 8.x-1.0-rc1
+package: Open Y (Experimental)
+
+# Information added by Drupal.org packaging script on 2021-09-20
+version: '1.0.2'
+project: 'personify'
+datestamp: 1632130390

@@ -1,0 +1,18 @@
+{
+    "name": "drupal/openy_rose",
+    "description": "Rose offers sprawling site menu options and high accessibility for blind or low vision users.",
+    "type": "drupal-theme",
+    "license": "GPL-2.0-or-later",
+    "homepage": "https://www.drupal.org/project/openy_rose",
+    "support": {
+        "docs": "https://docs.openy.org",
+        "issues": "https://www.drupal.org/project/issues/openy_rose",
+        "source": "https://git.drupalcode.org/project/openy_rose"
+    },
+    "require": {
+        "drupal/core": ">=8"
+    },
+    "suggest": {
+        "ymcatwincities/openy-project": "It is recommended that this theme be used with the Open Y base project, otherwise you may run into missing dependency errors. See https://github.com/ymcatwincities/openy-project#installation for instructions on how to get started with Open Y."
+    }
+}

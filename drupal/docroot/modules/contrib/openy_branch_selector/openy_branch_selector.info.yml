@@ -1,0 +1,13 @@
+name: Open Y Branch Selector
+type: module
+description: Provides a link to save location as My YMCA.
+core_version_requirement: ^8 || ^9
+# version: 8.x-1.0
+package: Open Y
+dependencies:
+  - openy_loc_branch
+
+# Information added by Drupal.org packaging script on 2021-09-24
+version: '1.0.3'
+project: 'openy_branch_selector'
+datestamp: 1632485382

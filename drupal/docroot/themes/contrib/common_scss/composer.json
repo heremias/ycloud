@@ -1,0 +1,11 @@
+{
+  "name": "open-y-subprojects/common_scss",
+  "description": "Common scss references for Open Y themes.",
+  "type": "drupal-theme",
+  "require": {
+    "open-y-subprojects/openy_features": "*",
+    "open-y-subprojects/openy_node_alert": "*"
+  },
+  "license": "GPL-2.0+",
+  "minimum-stability": "dev"
+}

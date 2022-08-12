@@ -1,0 +1,10 @@
+{
+  "name": "ynorth-projects/openy_node_session",
+  "description": "Contains the Open Y Node Session feature.",
+  "type": "drupal-module",
+  "require": {
+    "ymcatwincities/openy": "*"
+  },
+  "license": "GPL-2.0+",
+  "minimum-stability": "dev"
+}

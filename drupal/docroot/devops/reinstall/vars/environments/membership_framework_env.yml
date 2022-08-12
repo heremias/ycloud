@@ -1,0 +1,43 @@
+---
+env:
+  pre_settings:
+    - { name: '$settings["hash_salt"]', status: true, value: 'g1W4KZgWCeWh7Af9_gSb9D9HOiNaBdWPvQD-8x0yWpcgNpTBppaHR5VNGQBGvh2k8P8uWa1V8w'}
+    - { name: '$config_directories["staging"]', status: false, value: "{{ staging_config_dir }}" }
+    - { name: '$config_directories["sync"]', status: true, value: "{{ sync_config_dir }}" }
+    - { name: '$settings["install_profile"]', status: true, value: "{{ installation_profile_name }}" }
+    - { name: '$settings["file_public_path"]', status: true, value: 'sites/{{ settings_site_folder }}/files' }
+    - { name: '$settings["file_private_path"]', status: true, value: 'sites/{{ settings_site_folder }}/files/private' }
+    - { name: '$config["system.file"]["path.temporary"]', status: true, value: '/tmp' }
+  modules:
+    - { name: 'syslog', status: true }
+  drush_commands:
+    - { name: 'pm-uninstall', status: false, arguments: "update -y" }
+    - { name: 'then', status: true, arguments: "openy_carnation" }
+    - { name: 'en', status: true, arguments: "openy_addthis openy_demo_bfooter openy_demo_tarea openy_demo_nbranch migrate_tools openy_memberships_demo_content" }
+    - { name: 'user-password', status: true, arguments: "{{ drupal_user }} --password={{ drupal_pass }}" }
+    - { name: 'cr', status: true, arguments: "" }
+    - { name: 'cache-clear', status: true, arguments: "drush" }
+    - { name: 'ms', status: true, arguments: "" }
+    - { name: 'mim', status: true, arguments: "--group=openy_demo_fblock" }
+    - { name: 'mim', status: true, arguments: "--group=openy_demo_term" }
+    - { name: 'mim', status: true, arguments: "--group=openy_demo_nbranch" }
+    - { name: 'mim', status: true, arguments: "--group=openy_memberships_demo_content" }
+    - { name: 'cr', status: true, arguments: "" }
+    - { name: 'config-set', status: false, arguments: "shield.settings user {{ http_user }} -y" }
+    - { name: 'config-set', status: false, arguments: "shield.settings pass {{ http_pass }} -y" }
+    - { name: 'config-set', status: false, arguments: "system.site uuid USER_YOUR_UUID_HERE -y" }
+    - { name: 'config-set', status: false, arguments: "stage_file_proxy.settings origin {{ origin_site_url }} -y" }
+    - { name: 'config-set', status: true, arguments: "geolocation.settings google_map_api_key 'AIzaSyCzztpo_nVXIGjZdnu3g-lCuQSTnKbfEtM' -y" }
+    - { name: 'config-set', status: true, arguments: "system.site page.front /membership-builder" }
+    - { name: 'config-set', status: true, arguments: "openy_carnation.settings display_search_form 0" }
+  post_settings:
+    - { name: '$settings["cache"]["bins"]["render"]', status: false, value: 'cache.backend.memory' }
+    - { name: '$config["stage_file_proxy.settings"]["origin"]', status: false, value: '{{ origin_site_url }}' }
+    - { name: '$settings["file_public_path"]', status: true, value: 'sites/{{ settings_site_folder }}/files' }
+    - { name: '$settings["hash_salt"]', status: true, value: 'g1W4KZgWCeWh7Af9_gSb9D9HOiNaBdWPvQD-8x0yWpcgNpTBppaHR5VNGQBGvh2k8P8uWa1V8w'}
+    - { name: '$config_directories["staging"]', status: true, value: "{{ staging_config_dir }}" }
+    - { name: '$config_directories["sync"]', status: true, value: "{{ sync_config_dir }}" }
+    - { name: '$settings["install_profile"]', status: true, value: "{{ installation_profile_name }}" }
+    - { name: '$settings["file_public_path"]', status: true, value: 'sites/{{ settings_site_folder }}/files' }
+    - { name: '$settings["file_private_path"]', status: true, value: 'sites/{{ settings_site_folder }}/files/private' }
+    - { name: '$config["system.file"]["path.temporary"]', status: true, value: '/tmp' }

@@ -1,0 +1,45 @@
+---
+- name: Remove build collection directory
+  file:
+    state: absent
+    path: "{{ solr_data_path }}/{{ mysql_db }}"
+    mode: 0755
+
+- name: Remove config collection directory
+  file:
+    state: absent
+    path: "/tmp/{{ mysql_db }}"
+    mode: 0755
+
+- name: Restart solr service
+  ignore_errors: yes
+  service:
+    state: restarted
+    name: solr
+
+- name: Create new core folder in temp
+  become: yes
+  shell: mkdir -p /tmp/{{ mysql_db }}
+
+- name: Create new core archive from live config
+  ignore_errors: yes
+  become: yes
+  shell: drush solr-gsc solr /tmp/{{ mysql_db }}/{{ mysql_db }}.zip 8.11
+
+- name: Unpack new configs from zip
+  ignore_errors: yes
+  become: yes
+  ansible.builtin.shell: 
+    cmd: "unzip {{ mysql_db }}.zip"
+    chdir: /tmp/{{ mysql_db }}/
+
+- name: Create new core from data_driven_schema_configs
+  become: yes
+  ignore_errors: yes
+  shell: su - solr -c "/opt/solr/bin/solr create -c {{ mysql_db }} -d /tmp/{{ mysql_db }}/ -n {{ mysql_db }}"
+
+- name: Restart solr service
+  ignore_errors: yes
+  service:
+    state: restarted
+    name: solr

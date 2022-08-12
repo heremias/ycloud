@@ -1,0 +1,10 @@
+installation_ui:
+  version: 1.x
+  css:
+    theme:
+      assets/installation-profile-ui.css: {}
+  js:
+    assets/installation-profile-ui.js: {}
+  dependencies:
+    - jquery_ui_tooltip/tooltip
+    - core/jquery.ui.dialog

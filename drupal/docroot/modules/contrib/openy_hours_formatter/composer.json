@@ -1,0 +1,10 @@
+{
+  "name": "open-y-subprojects/openy_hours_formatter",
+  "description": "Hours Formatter widget from Open Y Distrubution.",
+  "type": "drupal-module",
+  "require": {
+    "ymcatwincities/openy": "*"
+  },
+  "license": "GPL-2.0+",
+  "minimum-stability": "dev"
+}

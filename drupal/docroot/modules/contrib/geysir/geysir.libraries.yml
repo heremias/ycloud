@@ -1,0 +1,19 @@
+geysir:
+  version: 1.x
+  css:
+    theme:
+      css/geysir.dialog.css: {}
+      css/geysir.paragraphs.css: {}
+  js:
+    js/geysir.js: {}
+  dependencies:
+    - core/drupal
+    - core/jquery
+
+geysir-toolbar:
+  version: VERSION
+  css:
+    component:
+      css/geysir.toolbar.css: {}
+  js:
+    js/geysir.toolbar.js: {}

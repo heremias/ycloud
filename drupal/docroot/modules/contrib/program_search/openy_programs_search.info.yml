@@ -1,0 +1,13 @@
+name: Open Y Programs Search
+type: module
+description: Provides a Block to search programs.
+core_version_requirement: ^8 || ^9
+# version: 8.x-1.0
+dependencies:
+  - daxko
+  - drupal:openy_socrates
+
+# Information added by Drupal.org packaging script on 2021-11-04
+version: '1.0.1'
+project: 'program_search'
+datestamp: 1636031918

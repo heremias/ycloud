@@ -1,0 +1,26 @@
+services:
+  social_feed_fetcher.logger:
+    class: Drupal\Core\Logger\LoggerChannel
+    factory: logger.factory:get
+    arguments: ['social_feed_fetcher']
+  social_feed_fetcher.linkedin.oauth.factory:
+    class: Drupal\social_feed_fetcher\ProviderDataFactory\LinkedinDataProviderFactory
+    arguments: ['@config.factory']
+  social_feed_fetcher.linkedin.client:
+    class: LinkedIn\Client
+    factory: ['@social_feed_fetcher.linkedin.oauth.factory', createLinkedinClient]
+  plugin.manager.node_processor:
+    class: Drupal\social_feed_fetcher\PluginNodeProcessorManager
+    arguments: ['@container.namespaces', '@cache.discovery', '@module_handler', '@config.factory', '@entity_type.manager', '@http_client', '@file_system']
+  plugin.social_data_provider.manager:
+    class: Drupal\social_feed_fetcher\SocialDataProviderManager
+    arguments: ['@container.namespaces', '@cache.discovery', '@module_handler', '@config.factory']
+  import_social_feed_service:
+    class: Drupal\social_feed_fetcher\ImportSocialFeedService
+    arguments: ['@config.factory', '@queue', '@plugin.social_data_provider.manager', '@state', '@social_feed_fetcher.logger', '@messenger']
+  social_feed_fetcher.instagram.client.factory:
+    class: Drupal\social_feed_fetcher\ProviderDataFactory\InstagramDataProvideFactory
+    arguments: ['@config.factory']
+  social_feed_fetcher.instagram.client:
+    class: EspressoDev\InstagramBasicDisplay\InstagramBasicDisplay
+    factory: ['@social_feed_fetcher.instagram.client.factory', create]

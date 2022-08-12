@@ -1,0 +1,18 @@
+<?php
+
+/**
+ * @file
+ */
+
+/**
+ * Update default logo path.
+ */
+function openy_carnation_update_8005() {
+  $config = \Drupal::service('config.factory')->getEditable('openy_carnation.settings');
+  $curr = $config->get('logo');
+  if ($curr['path'] == 'profiles/contrib/openy/themes/openy_themes/openy_carnation/dist/img/logo-white.png') {
+    $curr['path'] = 'themes/contrib/openy_carnation/dist/img/logo-white.png';
+    $config->set('logo', $curr);
+    $config->save();
+  }
+}

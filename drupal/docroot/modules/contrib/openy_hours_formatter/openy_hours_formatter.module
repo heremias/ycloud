@@ -1,0 +1,110 @@
+<?php
+
+/**
+ * @file
+ * Contains openy_hours_formatter.module.
+ */
+
+use Drupal\Core\Render\BubbleableMetadata;
+
+/**
+ * Implements hook_theme().
+ */
+function openy_hours_formatter_theme() {
+  return [
+    'openy_hours_formatter' => [
+      'variables' => [
+        'hours' => '',
+        'week' => [],
+      ],
+    ],
+  ];
+}
+
+/**
+ * Implements hook_token_info().
+ */
+function openy_hours_formatter_token_info() {
+  $info = [];
+
+  $info['types']['openy_hours'] = [
+    'name' => t('Open Y Hours'),
+    'description' => t('Tokens related to Open Y branch_hours information.')
+  ];
+
+  $info['tokens']['openy_hours']['day_of_week'] = [
+    'name' => t('Day of Week'),
+    'description' => t('An array of days for "dayOfWeek".')
+  ];
+
+  $info['tokens']['openy_hours']['opens'] = [
+    'name' => t('Opens'),
+    'description' => t('An hours string for "open".')
+  ];
+
+  $info['tokens']['openy_hours']['closes'] = [
+    'name' => t('Closes'),
+    'description' => t('An hours string for "closes".')
+  ];
+
+  return $info;
+}
+
+/**
+ * Implements hook_tokens().
+ */
+function openy_hours_formatter_tokens($type, $tokens, array $data, array $options, BubbleableMetadata $bubbleable_metadata) {
+  $replacements = [];
+
+  if ($type == 'openy_hours') {
+    $node = $data['node'];
+    // Only continue if the node we're acting on has field_branch_hours.
+    if ($node->hasField('field_branch_hours') && !$node->get('field_branch_hours')->isEmpty()) {
+      $days = [
+        'mon' => 'Monday',
+        'tue' => 'Tuesday',
+        'wed' => 'Wednesday',
+        'thu' => 'Thursday',
+        'fri' => 'Friday',
+        'sat' => 'Saturday',
+        'sun' => 'Sunday',
+      ];
+      $opens = [];
+      $closes = [];
+      foreach ($days as $key => $day) {
+        if ($hours = $node->field_branch_hours->{'hours_'.$key}) {
+          // Find a non-digit, non-word, non-whitespace character and split,
+          // and automagically return the full string if no match.
+          $hours = preg_split('/\s?[^\d\s\w:]\s?/',$hours, -1, PREG_SPLIT_NO_EMPTY);
+          $opens[$key] = date('H:i', strtotime($hours[0]));
+          $closes[$key] = $hours[1] ? date('H:i', strtotime($hours[1])): '';
+        }
+        else {
+          $opens[$key] = '00:00';
+          $closes[$key] = '00:00';
+        }
+      }
+      foreach ($tokens as $name => $original) {
+        // Our goal is to end up with matching arrays for day, open, close.
+        // To show a business as open 24 hours a day, set the open property
+        // to "00:00" and the closes property to "23:59". To show a business is
+        // closed all day, set both opens and closes properties to "00:00".
+        switch ($name) {
+          case 'day_of_week':
+            $replacements[$original] = implode(',', $days);
+            break;
+          case 'opens':
+            $replacements[$original] = implode(',', $opens);
+            break;
+          case 'closes':
+            $replacements[$original] = implode(',', $closes);
+            break;
+          default:
+            break;
+        }
+      }
+    }
+  }
+
+  return $replacements;
+}

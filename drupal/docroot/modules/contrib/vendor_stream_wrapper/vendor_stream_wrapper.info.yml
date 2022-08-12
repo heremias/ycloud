@@ -1,0 +1,11 @@
+name: 'Vendor Stream Wrapper'
+description: 'Creates the vendor:// stream wrapper, allowing for linking/embedding of CSS and JS files in the vendor directory.'
+core: '8.x'
+core_version_requirement: ^8 || ^9
+type: module
+configure: vendor_stream_wrapper.settings
+
+# Information added by Drupal.org packaging script on 2022-07-12
+version: '2.0.1'
+project: 'vendor_stream_wrapper'
+datestamp: 1657662511

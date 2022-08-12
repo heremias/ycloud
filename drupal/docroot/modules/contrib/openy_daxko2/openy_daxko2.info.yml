@@ -1,0 +1,13 @@
+name: Daxko API v2 integration
+type: module
+description: Provide way to import classes and sessions.
+core_version_requirement: ^8 || ^9
+# version: 8.x-1.0
+package: OpenY
+dependencies:
+  - openy_activity_finder:openy_activity_finder
+
+# Information added by Drupal.org packaging script on 2021-09-20
+version: '1.0.2'
+project: 'openy_daxko2'
+datestamp: 1632132112

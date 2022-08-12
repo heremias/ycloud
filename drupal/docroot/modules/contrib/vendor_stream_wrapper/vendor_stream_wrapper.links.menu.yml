@@ -1,0 +1,5 @@
+vendor_stream_wrapper.settings:
+  title: 'Vendor Stream Wrapper'
+  description: 'Configure the Vendor Stream Wrapper module.'
+  parent: system.admin_config_media
+  route_name: vendor_stream_wrapper.settings

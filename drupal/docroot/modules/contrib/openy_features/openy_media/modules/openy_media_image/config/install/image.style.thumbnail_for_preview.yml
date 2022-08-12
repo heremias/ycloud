@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies: {  }
+name: thumbnail_for_preview
+label: 'Thumbnail for preview'
+effects:
+  272e64a7-b52e-47e2-9f9f-c647e31a3843:
+    uuid: 272e64a7-b52e-47e2-9f9f-c647e31a3843
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 150
+      height: 150
+      anchor: center-center
+  78b8d329-631c-44ae-b517-dbde12f94c06:
+    uuid: 78b8d329-631c-44ae-b517-dbde12f94c06
+    id: image_convert
+    weight: 2
+    data:
+      extension: webp

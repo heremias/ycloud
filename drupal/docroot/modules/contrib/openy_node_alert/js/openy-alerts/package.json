@@ -1,0 +1,45 @@
+{
+  "name": "openy-alerts",
+  "version": "1.0.0",
+  "description": "Provides dynamic Alert content view.",
+  "scripts": {
+    "watch": "webpack watch --mode development",
+    "build": "webpack --mode production"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.36",
+    "@fortawesome/free-solid-svg-icons": "^5.15.4",
+    "@fortawesome/react-fontawesome": "^0.1.17",
+    "axios": "^0.26.1",
+    "dotenv": "^10.0.0",
+    "html-react-parser": "^1.4.6",
+    "preact": "^10.6.6",
+    "react": "^17.0.2",
+    "react-cookies": "^0.1.1",
+    "react-dom": "^17.0.2",
+    "react-redux": "^7.2.6",
+    "react-slick": "^0.28.1",
+    "redux": "^4.1.2",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.4.1",
+    "slick-carousel": "^1.8.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.16.5",
+    "@babel/preset-env": "^7.16.5",
+    "@babel/preset-react": "^7.16.5",
+    "babel-loader": "^8.2.3",
+    "css-loader": "^6.5.1",
+    "css-minimizer-webpack-plugin": "^3.3.1",
+    "dotenv-webpack": "^7.0.3",
+    "file-loader": "^6.2.0",
+    "html-webpack-plugin": "^5.5.0",
+    "mini-css-extract-plugin": "^2.4.5",
+    "style-loader": "^3.3.1",
+    "webpack": "^5.65.0",
+    "webpack-cli": "^4.9.1"
+  }
+}

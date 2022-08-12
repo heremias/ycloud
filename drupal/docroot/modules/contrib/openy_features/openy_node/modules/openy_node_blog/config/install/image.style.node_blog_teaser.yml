@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: node_blog_teaser
+label: 'Node blog teaser'
+effects:
+  ab5325cb-fbfb-4bb6-9343-1f9339d43dee:
+    uuid: ab5325cb-fbfb-4bb6-9343-1f9339d43dee
+    id: focal_point_scale_and_crop
+    weight: 2
+    data:
+      width: 362
+      height: 362
+      crop_type: focal_point
+  77e02ffa-70e5-4b24-a1a9-2f7ee09b3379:
+    uuid: 77e02ffa-70e5-4b24-a1a9-2f7ee09b3379
+    id: image_convert
+    weight: 2
+    data:
+      extension: webp

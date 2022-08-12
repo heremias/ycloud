@@ -1,0 +1,11 @@
+# Schema for the configuration files of the Vendor Stream Wrapper module.
+
+vendor_stream_wrapper.settings:
+  type: config_object
+  label: 'Vendor Stream Wrapper settings'
+  mapping:
+    allowed_file_patterns:
+      type: sequence
+      label: 'Allowed file patterns'
+      sequence:
+        type: string
