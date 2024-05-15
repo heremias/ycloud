@@ -1,4 +1,4 @@
-FROM php:8.1.8-apache as stage1
+FROM php:8.3.7-apache as stage1
 
 # Setting doc root
 ARG docroot=/var/www/drupal/docroot
@@ -110,7 +110,7 @@ COPY .htaccess /var/www
 
 # node & yarn
 RUN apt-get update && apt-get install -y nodejs npm
-RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash -
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
 RUN npm i -g yarn
 
 #Run base Drupal build with drush and composer
